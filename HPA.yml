@@ -177,6 +177,42 @@ spec:
     > This HPA is responsible for Scaleup and scale out the pods based on our resource.
     > It's not responsible for scale up and scale down the nodes or cluster. it's only responsible for pods itself.
     
-    -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Commands i used for this deployments
+------------------------------------
+
+kubectl get all -o wide
+
+kubectl apply -f yaml (without HPA)
+
+kubectl get deployment 
+
+kubectl get deployment -o wide
+
+kubectl get rs
+
+kubectl get pods 
+
+kubectl get pods -o wide
+
+kubectl apply -f serviceyamlfilename (here im creating service type with NodePort)
+
+kubectl get svc 
+
+Copy the publicip of my minikube:nodeport (you wanna know your minikube ip execute this command (minikube ip)
+
+kubectl top pods/nodes (it's used for getting info about metric resources of pods & nodes) 
+
+watch kubectl get pods/nodes (for continues observation use this command)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Now i'm attach my HPA with my Deployment
+----------------------------------------
+
+kubectl apply -f Deploymentfile name
+
+kubectl get hpa (now we can see the min and max pods and replica information.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
     
