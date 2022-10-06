@@ -120,7 +120,9 @@ spec:
             limits:
               cpu: 200m
               memory: 100Mi
-
+-------------------------------------------------------------------------------------------
+ > Now create the HPA and Attech to the Deployment which we required.
+------------------------------------------------------------------------------------------
 ---
 apiVersion: v1
 kind: Service
