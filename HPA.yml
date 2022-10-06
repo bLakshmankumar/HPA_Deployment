@@ -1,5 +1,5 @@
 How two container can communicate in the same pod.
-container to container communication would happens through localhost:portnumber with in a pod bcs both are having the same n/w space.
+container to container communication would happens through IP:portnumber with in a pod bcs both are having the same n/w space.
 _____________________________
 
 Deployment strategies 
@@ -90,7 +90,7 @@ Simply -:
 ----------------------------------------------------------------------------------------------------------
 Demo for HPA -:
 -------------------
- > Create a sample deployment without HPA so It don't mention Autoscaler for scale up and scaledown the application.
+ > I Create a sample deployment without HPA so It don't mention Autoscaler for scale up and scaledown the application.
  -----
  ---
 apiVersion: apps/v1
