@@ -37,7 +37,39 @@ Min Ready Seconds -:
  --------------------------------------
  >  progressDeadlineSeconds is an optional field that specifies the number of seconds you want to wait for your Deployment to progress before the system reports back that the Deployment has failed progressing 
  > - surfaced as a condition with type: Progressing, status: "False". and reason: ProgressDeadlineExceeded in the status of the resource.
- 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollingupdatedeployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 HPA --> Horizantal Pod Autoscaler.
 ---------------------------------------------
 
