@@ -21,6 +21,7 @@ What is Storageclass(Volume Provisioner) -:
 
 1) Static Volumes-:
 ------------------
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -32,13 +33,20 @@ spec:
   - ReadWriteOnce
   hostpath:
     path: "/kube/volume
-  ...
+
+.........................................................................................................................................................................................................
+
 # > we have different types of access modes in pv 1) ReadWriteOnce 2) ReadWriteMany 3) ReadOnlyMany.#
 # > ReadWriteOnce -> Only one node/pod can read and write the data.
 # > ReadWriteMany -> Multiple Nodes/pods can read and write data.
 # > ReadOnlyMany  -> Many Nodes/pods can ReadOnly volumes.
 # > we create a volume but how can we request a volume for that we need to create a pvc.
+# > we can create a lebels for a selectors also.
+.........................................................................................................................................................................................................
+
 # > create a pvc -:
+-------------------
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -50,6 +58,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
 
 # how the pvc will associated with pv -:
 ----------------------------------------
