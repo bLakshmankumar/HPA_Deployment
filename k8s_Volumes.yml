@@ -36,10 +36,16 @@ what is PV -:
 -----------------
 > The k8s will maintain the volume information like type of volume we using, and who claim that volume.
 > The k8s cluster will maintain the volume informatiion.
+> PV is a piece of storage in a cluster.
+> PV will provide the storage resources to the k8s objects.
+
+These PVs provisioned in two ways  -:
+--------------------------------------------------
+   1)  Static Volumes                            2) Dynamic Volumes
 
 Recommended way -:
---------------------------
-> Even if using Hostpath or NFS or any type of volume also we have to create a PV and our pod will claim that PV.
+----------------------------
+> Even if using Hostpath or NFS or any type of volume also first we have to create a PV  with that storage type (weather it's a Hostpath or nfs) then our pod will claim that volume with help of PVC.
 
 Doc for Deploy a smaple app -:
 ---------------------------------------
