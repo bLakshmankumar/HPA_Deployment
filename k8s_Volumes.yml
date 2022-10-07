@@ -41,7 +41,16 @@ what is PV -:
 
 These PVs provisioned in two ways  -:
 --------------------------------------------------
-   1)  Static Volumes                            2) Dynamic Volumes
+    1)  Static Volumes   -: which is a created  manually. as a k8's admin we can create pv manually. which can be used/claimed by pods whatever required some storage.
+    2) Dynamic Volumes   -: Here we no need to create pv object manually. The implementation of dynamic volume provisioning is based on the API object StorageClass.
+    For Dynamic Volumes First we need to create storage class and we need to provide that name to pvc manifest.
+
+What is Storageclass(Volume Provisioner) -:
+------------------------------------------
+> A StorageClass provides a way for administrators to describe the "classes" of storage they offer.
+> Different classes might map to quality-of-service levels, or to backup policies, or to arbitrary policies determined by the cluster administrators. 
+> It's a piece of code(driver) which will create volumes(pv) whenever we have a pvc request and we don't have pv in available in the cluster.
+> Each StorageClass contains the fields provisioner, parameters, and reclaimPolicy, which are used when a PersistentVolume belonging to the class needs to be dynamically provisioned.
 
 Recommended way -:
 ----------------------------
