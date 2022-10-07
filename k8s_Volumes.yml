@@ -224,3 +224,21 @@ spec:
 When we deploy any application as containers what things we should Consider -:
 ----------------------------------------------------------------------------------------------------------
 > we shouldn't do any hard code any configurations. which are going to be change for each and every environment.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Commands i used for this deploymnet -:
+--------------------------------------
+
+kubectl apply -f app.yml
+kubectl apply -f appsvc.yml
+kubectl apply -f db.yml
+kubectl apply -f dbsvc.yml
+kubectl get deployment
+kubectl get svc
+kubectl get all --all
+kubectl get rs
+kubectl get pods -o wide
+kubectl get pv
+kubectl get pvc
+kubectl get storageclass
+kubectl describe pods  
