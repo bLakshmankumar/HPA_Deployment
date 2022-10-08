@@ -83,6 +83,10 @@ spec:
 # So now i created the volumeclaim name with *(mongodbpvc)*.
 # This name (mongodbpvc) i'll associated with my mongodb db manifest(k8s_Volumes.yml) inside volume section.
 # How to delete a pvc first we need to delete the pod then only we can delete the pvc.
+--------------------------------------------------------------------------------------------------------------------------------------------
+#Recommended way -:
+-------------------
+# > Even if using Hostpath or NFS or any type of volume also first we have to create a PV  wi>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Dynamic Volumes -:
 -------------------
@@ -93,9 +97,5 @@ spec:
 # > For creating a Dynamic volumes also first we need to create a ServiceAccount then attach a Clusterrole(Permissions).
 # > I created a NFS Storage class with Service account and I Provide that link in below.
 
- 
-
-
-Recommended way -:
-----------------------------
-> Even if using Hostpath or NFS or any type of volume also first we have to create a PV  with that storage type (weather it's a Hostpath or nfs) then our pod will claim that volume with help of PVC.
+# >  https://github.com/bLakshmankumar/HPA_Deployment/blob/main/nfsstorageclass.yml  <
+-------------------------------------------------------------------------------------------
