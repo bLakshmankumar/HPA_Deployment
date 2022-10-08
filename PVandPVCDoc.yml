@@ -13,10 +13,11 @@
 
 #What is Storageclass(Volume Provisioner) -:
 #------------------------------------------
-> A StorageClass provides a way for administrators to describe the "classes" of storage they offer.
-> Different classes might map to quality-of-service levels, or to backup policies, or to arbitrary policies determined by the cluster administrators.
-> It's a piece of code(driver) which will create volumes(pv) whenever we have a pvc request and we don't have pv in available in the cluster.
-> Each StorageClass contains the fields provisioner, parameters, and reclaimPolicy, which are used when a PersistentVolume belonging to the class needs to be dynamically provisioned.
+# > A StorageClass provides a way for administrators to describe the "classes" of storage they offer.
+# > Different classes might map to quality-of-service levels, or to backup policies, or to arbitrary policies determined by the cluster administrators.
+# > It's a piece of code(driver) which will create volumes(pv) whenever we have a pvc request and we don't have pv in available in the cluster.
+# > Each StorageClass contains the fields provisioner, parameters, and reclaimPolicy, which are used when a PersistentVolume belonging to the class needs to be dynamically provisioned.
+# > If we using any EKS/Aks clusters we no need to create any provisioners(storage class) by default they provide a storage class.
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #1) Static Volumes-:
@@ -34,7 +35,10 @@ spec:
   - ReadWriteOnce
   hostpath:
     path: "/kube/volume
-
+#If we wanna use NFS volume remove the hostpath or create another volume with nfs
+# nfs:
+#  server: 172.10.2.3 (provide NFS server ip)
+#  path: "/mnt/share" (provide the path which we created on nfs server) 
 #.........................................................................................................................................................................................................
 
 # > we have different types of access modes in pv 1) ReadWriteOnce 2) ReadWriteMany 3) ReadOnlyMany.#
@@ -79,6 +83,19 @@ spec:
 # So now i created the volumeclaim name with *(mongodbpvc)*.
 # This name (mongodbpvc) i'll associated with my mongodb db manifest(k8s_Volumes.yml) inside volume section.
 # How to delete a pvc first we need to delete the pod then only we can delete the pvc.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Dynamic Volumes -:
+-------------------
+# > now i'm not create pv manually i just create pvc manually and pv will be automatically created.
+# > For ex already we have a NFS server now we deploy the NFS provisioner.
+# > Provisioner is ntg but a some kind of code but if you use eks/aks k8s clusters we no need to create a provisioners by default provisioners are available in that cluster.
+# > If we use eks cluster by default we get a EBS provisioner (The storage class).
+# > For creating a Dynamic volumes also first we need to create a ServiceAccount then attach a Clusterrole(Permissions).
+# > I created a NFS Storage class with Service account and I Provide that link in below.
+
+ 
+
+
 Recommended way -:
 ----------------------------
 > Even if using Hostpath or NFS or any type of volume also first we have to create a PV  with that storage type (weather it's a Hostpath or nfs) then our pod will claim that volume with help of PVC.
