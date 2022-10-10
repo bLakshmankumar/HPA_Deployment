@@ -1,4 +1,4 @@
-3#                                             Scheduling, Preemption and Eviction / Taints and Tolerations
+#                                             Scheduling, Preemption and Eviction / Taints and Tolerations
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # With help of these Nodeselector or affinity, or taints and tolerance, by using we can shedule the pods in specific nodes.
@@ -144,8 +144,13 @@
 #	value: "value1"
 #    effect: "NoSchedule"
 	
-# > You specify a toleration for a pod in the PodSpec. Both of the following tolerations "match" the taint created by the kubectl taint line above, and thus a pod with either toleration would be able to schedule onto node1.
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+# > Now Execute the file. -> kubectl apply -f taints.yml
+#	> kubectl get nodes
+#	> kubectl get pods -o wide 
+#	> kubectl desribe nodes nodename.
+	
+# 	> You specify a toleration for a pod in the PodSpec. Both of the following tolerations "match" the taint created by the kubectl taint line above, and thus a pod with either toleration would be able to schedule onto node1.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
