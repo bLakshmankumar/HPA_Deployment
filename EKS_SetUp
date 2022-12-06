@@ -105,7 +105,9 @@
 #   >  Click on next and click on create nodegroup.
 #   > Using Launch Configuraion it'll create a node groups.
 #   > Now we can execute and see the our nodes. -: kubectl get nodes.
-
+#   > ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#   > Additional Info -:
+#   > =================
 #   > When we deploy any microservice first we need to check the ns of on which ns it has to deploy 
 #   > How to check our current namespace (or) our current default ns    -: kubectl config view  > we get our current ns informationas 
 #   > How to set specific ns as my current/default ns                   -: kubectl config set-context --current --namespace=ns name (which you wanna make it as a default ns). 
