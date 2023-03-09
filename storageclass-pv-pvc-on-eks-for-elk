@@ -1,0 +1,59 @@
+Created an ebs storage on console 30GB
+===============================
+Then do this below steps -:
+----------------------------------
+
+Created a StorageClass with dsc.yaml on dsc dir 
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aws-ebs
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+
+Created a PV -:
+============
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  awsElasticBlockStore:
+    fsType: xfs
+    volumeID: vol-0db9ef113925fd943
+  capacity:
+    storage: 30Gi
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: aws-ebs
+  volumeMode: Filesystem
+
+Created an pvc -:
+=============
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: elasticsearch-master
+  name: elasticsearch-master-elasticsearch-master-0
+  namespace: elk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: aws-ebs
+  volumeName: pv
+========================================================================
+
+Then Verify the PV                 - kubectl get pv
+Verify PVC               - kubectl get pvc 
+Verify the storageclass  - kubectl get sc 
