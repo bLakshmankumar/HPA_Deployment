@@ -3,7 +3,8 @@ Created an ebs storage on console 30GB
 Then do this below steps -:
 ----------------------------------
 
-Created a StorageClass with dsc.yaml on dsc dir 
+Created a StorageClass with dsc.yaml on dsc dir  -: {vi dsc.yaml}
+-----------------------------------------------------------------
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -17,8 +18,8 @@ parameters:
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 
-Created a PV -:
-============
+Created a PV -: { Vi pv.yaml}
+=============================
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -35,8 +36,8 @@ spec:
   storageClassName: aws-ebs
   volumeMode: Filesystem
 
-Created an pvc -:
-=============
+Created an pvc -: {vi pvc.yaml}
+===============================
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -54,6 +55,17 @@ spec:
   volumeName: pv
 ========================================================================
 
-Then Verify the PV                 - kubectl get pv
-Verify PVC               - kubectl get pvc 
+Deploy commands -:
+------------------
+kubectl create -f dsc.yaml   {deploy storage class}               if have any you ns then use > kubectl create -f dec.yaml -n ns-name
+kubectl create -f pv.yaml   {deploy persistant volume} 
+kubectl create -f pvc.yaml   {deploy persistant volume claim}      if have any you ns then use >  kubectl create -f pvc.yaml -n ns-name 
+
+Then Verify the things -:
+=========================
 Verify the storageclass  - kubectl get sc 
+Then Verify the PV       - kubectl get pv
+Verify PVC               - kubectl get pvc   
+
+# If you wanna verify them with using Your namespace then use -n ns-name.
+
