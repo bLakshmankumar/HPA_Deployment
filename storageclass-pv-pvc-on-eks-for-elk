@@ -1,7 +1,7 @@
-Created an ebs storage on console 30GB
-===============================
+Created an ebs storage on aws console Ex -:30GB
+================================================
 Then do this below steps -:
-----------------------------------
+---------------------------
 
 Created a StorageClass with dsc.yaml on dsc dir  -: {vi dsc.yaml}
 -----------------------------------------------------------------
