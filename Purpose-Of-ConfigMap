@@ -65,6 +65,53 @@ spec:
 
 # Note that the replicas field in the Pod definition specifies the number of replicas of the Pod that should be created.
 # In this case, the value is set to 10, which means that Kubernetes will create 10 copies of the Pod, each with its own set of environment variables derived from the my-configmap ConfigMap.
+================================================================================================================================================================================================
+
+# Practical view -2 -:
+======================
+
+In Kubernetes, a ConfigMap is an API resource used to store configuration data that can be consumed by applications running in a containerized environment.
+
+It is typically used to separate configuration data from container images and make it easier to manage application configuration.
+
+ConfigMaps store key-value pairs and can be used to configure multiple containers in a pod or to configure different pods that are part of the same application.
+
+When a pod is launched, Kubernetes mounts the ConfigMap data as a volume in the container, allowing the application to access the configuration data as files or environment variables.
 
 
+# Here is an example YAML file that creates a ConfigMap named "my-config" with two key-value pairs:
+---------------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  DB_HOST: "localhost"
+  DB_PORT: "5432"
+
+# In this example, the ConfigMap contains configuration data for a database connection. The key-value pairs specify the database hostname and port number.
+
+# Once the ConfigMap is created, it can be consumed by a pod by adding a volume and volumeMounts to the pod's YAML configuration. Here is an example:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: my-image
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: my-config
+
+# In this example, a pod is created with a container that mounts a volume named "config-volume" at the path "/etc/config". 
+
+# The volume is populated with the data from the "my-config" ConfigMap. The container can access the configuration data as files in the "/etc/config" directory.
+
+# This is just a basic example, but ConfigMaps can be used in many different ways to manage configuration data in a Kubernetes environment.
 
