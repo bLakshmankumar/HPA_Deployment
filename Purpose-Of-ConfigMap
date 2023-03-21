@@ -23,3 +23,48 @@ The configuration data can be used by your application running in a container, o
     If you have a multi-container pod, you can use a single ConfigMap to provide configuration data to all the containers in the pod.
 
 Overall, ConfigMaps are a useful way to manage configuration data in Kubernetes, making it easier to manage, update, and share configuration data across different objects
+
+# Practical view point -:
+# -----------------------
+  > The purpose of ConfigMaps is to provide a way to manage configuration data independently of containerized applications.
+  > By separating configuration from application code, ConfigMaps make it easier to manage configuration changes and updates.
+  
+ # Here's an example of a YAML file that creates a ConfigMap named my-configmap with two key-value pairs:
+ 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+data:
+  app.properties: |
+    property1=value1
+    property2=value2
+  db.properties: |
+    db.host=example.com
+    db.port=3306
+    
+# Once the ConfigMap is created, you can use it in a Pod definition to inject the configuration data into your container. 
+
+# Here's an example of a Pod definition that uses the my-configmap ConfigMap:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: my-image
+    envFrom:
+    - configMapRef:
+        name: my-configmap
+  replicas: 10
+  
+# In this example, the Pod definition specifies that the my-container container should use environment variables derived from the my-configmap ConfigMap.
+# The envFrom field specifies that the container should use all the key-value pairs in the ConfigMap as environment variables.
+
+# Note that the replicas field in the Pod definition specifies the number of replicas of the Pod that should be created.
+# In this case, the value is set to 10, which means that Kubernetes will create 10 copies of the Pod, each with its own set of environment variables derived from the my-configmap ConfigMap.
+
+
+
