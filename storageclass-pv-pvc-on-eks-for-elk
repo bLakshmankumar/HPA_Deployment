@@ -57,9 +57,9 @@ spec:
 
 Deploy commands -:
 ------------------
-kubectl create -f dsc.yaml   {deploy storage class}               if have any you ns then use > kubectl create -f dec.yaml -n ns-name
+kubectl create -f dsc.yaml   {deploy storage class}                if you have any ns then use > kubectl create -f dec.yaml -n ns-name
 kubectl create -f pv.yaml   {deploy persistant volume} 
-kubectl create -f pvc.yaml   {deploy persistant volume claim}      if have any you ns then use >  kubectl create -f pvc.yaml -n ns-name 
+kubectl create -f pvc.yaml   {deploy persistant volume claim}      if you have any ns then use >  kubectl create -f pvc.yaml -n ns-name 
 
 Then Verify the things -:
 =========================
