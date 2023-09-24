@@ -1,0 +1,50 @@
+Steps To deploy An application with Taints and Tolerations on specific node group -: 
+===============================================================
+Step -1 -: 
+-----------
+First, we need to taint the node group that we want to use with a specific key-value pair. For example, let's say we want to taint a node group with the key-value pair app=acme.
+
+ we  can use the following command to taint the nodes in the node group:
+
+         > kubectl taint nodes <node-group-name/Node-ip> app=acme:NoSchedule
+
+This command will taint the nodes in the specified node group with the special=true key-value pair and set the effect to NoSchedule.
+
+This means that no pods will be scheduled on these nodes unless the pod has a matching toleration.
+
+Step - 2 -: 
+--------------
+Now, we can create a deployment for our application and specify a toleration that matches the taint on the node group. Here's an deployment YAML file:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acme-fitness
+spec:
+  replicas: 3
+  selector:
+	matchLabels:
+  	app: my-app
+  template:
+	metadata:
+  	labels:
+    	app: my-app
+	spec:
+  	tolerations:
+  	- key: app
+    	operator: Equal
+    	value: "acme"
+    	effect: NoSchedule
+  	containers:
+  	- name: my-app-container
+    	image: imagename:latest
+    	ports:
+    	- containerPort: 80
+
+we're creating a deployment for an application called  acme-fitness. We've added a tolerations section to the deployment specification, which specifies that the deployment can tolerate nodes with a taint that has the special=true key-value pair and the NoSchedule effect.
+
+This allows the deployment to be scheduled on the nodes in the specified node group.
+
+Note -: 
+----------
+Note that we can use the kubectl describe nodes <node-name> command to view the taints and tolerations for a specific node.
