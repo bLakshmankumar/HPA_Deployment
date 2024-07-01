@@ -1,1 +1,1 @@
-#k8s-Manifests
+# K8s-complete doc for most of the manifests
